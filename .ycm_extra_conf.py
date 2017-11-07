@@ -40,11 +40,13 @@ flags = [
 # relevant for c++ headers.
 # For a C project, you would set this to 'c' instead of 'c++'.
 '-x', 'c++',
-'-isystem', '/usr/include',
 '-isystem', '/usr/include/c++/4.9/',
 '-isystem', '/usr/include/x86_64-linux-gnu/c++/4.9/',
+'-isystem', '/usr/include/c++/6/',
+'-isystem', '/usr/include/x86_64-linux-gnu/c++/6/',
 '-isystem', '/usr/lib64/gcc/x86_64-pc-linux-gnu/4.8.4/include/g++-v4',
 '-isystem', '/usr/lib64/gcc/x86_64-pc-linux-gnu/4.8.4/include/g++-v4/x86_64-pc-linux-gnu/',
+'-isystem', '/usr/include',
 '-isystem', '/usr/local/include',
 '-isystem', '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include',
 '-isystem', '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1',
