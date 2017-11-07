@@ -1,6 +1,8 @@
 #ifndef __EIGHT_WORDS_H__
 #define __EIGHT_WORDS_H__
 
+#include <string>
+
 #include "eightwords_type.h"
 
 // 八字排盘

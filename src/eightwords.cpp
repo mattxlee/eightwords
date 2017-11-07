@@ -1,6 +1,8 @@
 #include "eightwords.h"
 #include "face_converter.h"
 
+#include <algorithm>
+
 CNString splitChineseString(const std::string &src)
 {
     CNString result;

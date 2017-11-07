@@ -1,5 +1,8 @@
 #include "face_converter.h"
 
+#include <stdexcept>
+#include <cstring>
+
 std::string Convertor::face_to_string(face f)
 {
     switch (f)
@@ -28,8 +31,8 @@ Convertor::~Convertor()
 
 std::string Convertor::convert(const std::string &src)
 {
-    int arg = 1;
-    iconvctl(_iconv, ICONV_SET_DISCARD_ILSEQ, &arg);
+    // int arg = 1;
+    // iconvctl(_iconv, ICONV_SET_DISCARD_ILSEQ, &arg);
     const char *sz_src = src.c_str();
     size_t len_src = src.size() + 1;
     if (src.empty())
@@ -38,9 +41,9 @@ std::string Convertor::convert(const std::string &src)
     }
     size_t len_dst = len_src * 3;
     char *sz_dst2 = new char[len_dst];
-    memset(sz_dst2, 0, len_dst);
+    std::memset(sz_dst2, 0, len_dst);
     char *sz_dst = sz_dst2;
-    auto err = iconv(_iconv, const_cast<char **>(&sz_src), &len_src, &sz_dst, &len_dst);
+    int err = iconv(_iconv, const_cast<char **>(&sz_src), &len_src, &sz_dst, &len_dst);
     if (err == -1)
     {
         delete[] sz_dst2;
