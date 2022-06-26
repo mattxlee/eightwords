@@ -7,10 +7,10 @@
 
 ### 库需求
 
-#### Boost
+#### cxxopts
 解析命令行参数使用
 
-#### iconv
+#### libiconv
 字符集转换使用
 
 #### sqlite3
@@ -18,9 +18,11 @@
 
 ### 编译指令
 
+编译使用conan来管理包，所以请在系统中安装conan
+
 ```
 mkdir build
-cd build && cmake ..
+cd build && conan install .. && cmake ..
 make
 ```
 
@@ -32,13 +34,13 @@ make
   -m [ --month ] arg (=10)  月
   -d [ --day ] arg (=10)    日
   -H [ --hour ] arg (=7)    小时
-  -s [ --sqlite3 ] arg      Sqlite3数据库文件名称
+  -s [ --database ] arg     Sqlite3数据库文件名称
 ```
-需要通过--sqlite3,-s参数将日历数据库文件路径传给程序，日历数据库文件名称为calendar.db，保存在工程目录的data目录下
+需要通过--database参数将日历数据库文件路径传给程序，日历数据库文件名称为calendar.db，保存在工程目录的data目录下
 
 例如，执行如下命令将会把1980年2月10日3点出生的八字排盘
 ```
-build/eightwords -s ./data/calendar.db -y 1980 -m 2 -d 10 -H 3
+build/bin/eightwords_cli --database ./data/calendar.db -y 1980 -m 2 -d 10 -H 3
 ```
 
 命令结果为
