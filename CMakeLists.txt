@@ -17,8 +17,18 @@ include_directories(
     "./include"
     )
 
-file(GLOB src "./src/*.cpp")
+set(LIB_SRCS
+    ./src/calendar.cpp
+    ./src/eightwords.cpp
+    ./src/face_converter.cpp
+    )
 
-add_executable(eightwords ${src})
+set(CMD_SRCS
+    ./src/main.cpp
+    )
 
-target_link_libraries(eightwords cxxopts::cxxopts SQLite::SQLite3 Iconv::Iconv)
+add_library(eightwords STATIC ${LIB_SRCS})
+
+add_executable(eightwords_cli ${CMD_SRCS})
+
+target_link_libraries(eightwords_cli eightwords cxxopts::cxxopts SQLite::SQLite3 Iconv::Iconv)
