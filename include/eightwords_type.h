@@ -55,10 +55,9 @@ typedef std::map<int, CNChar> HourToCNHour;
 typedef std::vector<CNString> CNStringList;
 
 // 值
-struct CNDayToHour
-{
-    CNString index; // 日对应的索引中文：甲己 乙庚 丙辛 丁壬 戊癸
-    CNChar value;   // 甲子 丙子 戊子 庚子 壬子 中的甲、丙、戊等
+struct CNDayToHour {
+    CNString index;  // 日对应的索引中文：甲己 乙庚 丙辛 丁壬 戊癸
+    CNChar value;    // 甲子 丙子 戊子 庚子 壬子 中的甲、丙、戊等
 };
 
 // 对照表

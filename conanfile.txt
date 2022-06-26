@@ -1,0 +1,9 @@
+[requires]
+cxxopts/3.0.0
+sqlite3/3.38.5
+libiconv/1.16
+
+[generators]
+cmake
+cmake_find_package
+cmake_paths

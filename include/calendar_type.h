@@ -4,43 +4,33 @@
 #include <map>
 #include <string>
 
-struct CalendarKey
-{
-    int year;  // 英文年
-    int month; // 英文月
-    int day;   // 英文日
+struct CalendarKey {
+    int year;   // 英文年
+    int month;  // 英文月
+    int day;    // 英文日
 };
 
-inline bool operator<(const CalendarKey &lhs, const CalendarKey &rhs)
-{
-    if (lhs.year < rhs.year)
-        return true;
-    if (lhs.year > rhs.year)
-        return false;
+inline bool operator<(const CalendarKey& lhs, const CalendarKey& rhs) {
+    if (lhs.year < rhs.year) return true;
+    if (lhs.year > rhs.year) return false;
 
-    if (lhs.month < rhs.month)
-        return true;
-    if (lhs.month > rhs.month)
-        return false;
+    if (lhs.month < rhs.month) return true;
+    if (lhs.month > rhs.month) return false;
 
-    if (lhs.day < rhs.day)
-        return true;
-    if (lhs.day > rhs.day)
-        return false;
+    if (lhs.day < rhs.day) return true;
+    if (lhs.day > rhs.day) return false;
 
     return true;
 }
 
-inline bool operator==(const CalendarKey &lhs, const CalendarKey &rhs)
-{
+inline bool operator==(const CalendarKey& lhs, const CalendarKey& rhs) {
     return lhs.year == rhs.year && lhs.month == rhs.month && lhs.day == rhs.day;
 }
 
-struct CalendarDay
-{
-    std::string chinaYear;  // 中文年
-    std::string chinaMonth; // 中文月
-    std::string chinaDay;   // 中文日
+struct CalendarDay {
+    std::string chinaYear;   // 中文年
+    std::string chinaMonth;  // 中文月
+    std::string chinaDay;    // 中文日
 };
 
 // 英中日历对照

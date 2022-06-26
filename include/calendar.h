@@ -7,19 +7,18 @@
 
 #include "calendar_type.h"
 
-class Calendar
-{
-  public:
-    explicit Calendar(const std::string &dbFile);
+class Calendar {
+public:
+    explicit Calendar(const std::string& dbFile);
     ~Calendar();
 
     CalendarDay queryChinaDay(int year, int month, int day);
 
-  private:
+private:
     void CC(int ret);
 
-  private:
-    sqlite3 *m_sqlite3 = nullptr;
+private:
+    sqlite3* m_sqlite3 = nullptr;
 };
 
 #endif

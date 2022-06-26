@@ -5,24 +5,17 @@
 
 #include <string>
 
-enum face
-{
-    face_utf8 = 0,
-    face_gb2312,
-    face_big5,
-    face_gbk
-};
+enum face { face_utf8 = 0, face_gb2312, face_big5, face_gbk };
 
-class Convertor
-{
-  public:
+class Convertor {
+public:
     static std::string face_to_string(face f);
 
     Convertor(face in_face, face out_face);
     ~Convertor();
-    std::string convert(const std::string &src);
+    std::string convert(const std::string& src);
 
-  private:
+private:
     iconv_t _iconv = nullptr;
 };
 

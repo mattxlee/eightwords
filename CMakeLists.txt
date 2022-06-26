@@ -1,10 +1,17 @@
-cmake_minimum_required(VERSION 2.8.4)
+cmake_minimum_required(VERSION 3.2)
 
 project(eightwords)
 
-message(STATUS "Current system ${CMAKE_SYSTEM_NAME}")
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
+
+include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
 
 add_definitions(-std=c++11)
+
+find_package(cxxopts REQUIRED)
+find_package(SQLite3 REQUIRED)
+find_package(Iconv REQUIRED)
 
 include_directories(
     "./include"
@@ -14,11 +21,4 @@ file(GLOB src "./src/*.cpp")
 
 add_executable(eightwords ${src})
 
-find_package(Boost 1.54 REQUIRED program_options)
-
-if (APPLE)
-  message(STATUS "Apple needs linking libiconv")
-  set(ICONVLIB "iconv")
-endif(APPLE)
-
-target_link_libraries(eightwords sqlite3 ${ICONVLIB} ${Boost_LIBRARIES})
+target_link_libraries(eightwords cxxopts::cxxopts SQLite::SQLite3 Iconv::Iconv)
