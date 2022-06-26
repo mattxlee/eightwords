@@ -14,6 +14,7 @@ std::string Convertor::face_to_string(face f) {
         case face_gbk:
             return "gbk";
     }
+    return "utf-8";
 }
 
 Convertor::Convertor(face in_face, face out_face) {
