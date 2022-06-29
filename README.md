@@ -8,23 +8,24 @@
 ### 库需求
 
 #### cxxopts
+
 解析命令行参数使用
 
 #### libiconv
+
 字符集转换使用
 
 #### sqlite3
+
 从sqlite3数据库中查询农历日期
 
 ### 编译指令
 
-编译使用conan来管理包，所以请在系统中安装conan
+默认使用[Conan](https://conan.io)包管理器来管理包，请参考[Conan](https://conan.io)官方网站安装Conan后，使用以下命令来获取平台包然后执行`cmake ..`进行配置和编译。
 
-```
-mkdir build
-cd build && conan install .. && cmake ..
-make
-```
+`mkdir build && cd build && conan install .. && cmake .. && make`
+
+注：若不使用Conan，请不要执行`conan install ..`，然后使用`cmake .. -DUSE_CONAN=OFF`来配置。
 
 ## 使用说明
 编译出来的工具为命令行工具，使用-h或--help将显示以下命令行信息
