@@ -29,6 +29,10 @@ set(CMD_SRCS
 
 add_library(eightwords STATIC ${LIB_SRCS})
 set_target_properties(eightwords PROPERTIES CXX_STANDARD 11)
+target_compile_options(eightwords PUBLIC
+    $<$<CONFIG:DEBUG>:-O0 -g>
+    $<$<CONFIG:RELEASE>:-O3 -g>
+    )
 target_include_directories(eightwords PUBLIC
     ./include
     )

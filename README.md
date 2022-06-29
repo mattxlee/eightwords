@@ -26,6 +26,7 @@
 `mkdir build && cd build && conan install .. && cmake .. && make`
 
 注：若不使用Conan，请不要执行`conan install ..`，然后使用`cmake .. -DUSE_CONAN=OFF`来配置。
+注：若要编译非优化带调试信息的版本，请使用`cmake .. -DCMAKE_BUILD_TYPE=Debug`来配置。
 
 ## 使用说明
 编译出来的工具为命令行工具，使用-h或--help将显示以下命令行信息
