@@ -14,7 +14,7 @@ public:
                 ("year,y", "Year", cxxopts::value<int>())                  // --year
                 ("month,m", "Month", cxxopts::value<int>())                // --month
                 ("day,d", "Day", cxxopts::value<int>())                    // --day
-                ("hour,h", "Hour", cxxopts::value<int>())                  // --hour
+                ("hour,H", "Hour", cxxopts::value<int>())                  // --hour
                 ("database,f", "Database", cxxopts::value<std::string>())  // --database
                 ;
 
