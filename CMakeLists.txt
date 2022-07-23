@@ -29,7 +29,7 @@ ExternalProject_Add(SQLite3
     URL_HASH SHA256=87775784f8b22d0d0f1d7811870d39feaa7896319c7c20b849a4181c5a50609b
     CONFIGURE_COMMAND ""
     BUILD_COMMAND ""
-    INSTALL_COMMAND cp ${THIRD}/src/SQLite3/sqlite3.h ${THIRD}/include
+    INSTALL_COMMAND ""
     )
 
 set(SQLITE3_SRCS ${THIRD}/src/SQLite3/sqlite3.c)
@@ -39,6 +39,7 @@ add_dependencies(sqlite SQLite3)
 
 include_directories(
     ${THIRD}/include
+    ${THIRD}/src/SQLite3
     ./include
     )
 
