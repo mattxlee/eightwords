@@ -18,10 +18,10 @@ ExternalProject_Add(Iconv
     PREFIX ${THIRD}
     URL https://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.17.tar.gz
     URL_HASH SHA256=8f74213b56238c85a50a5329f77e06198771e70dd9a739779f4c02f65d971313
-    CONFIGURE_COMMAND ./configure --prefix=${CMAKE_BINARY_DIR}
+    CONFIGURE_COMMAND ./configure --prefix=${THIRD}
     BUILD_IN_SOURCE 1
     )
-set(ICONV_LIBRARIES ${CMAKE_BINARY_DIR}/lib/libcharset.a ${CMAKE_BINARY_DIR}/lib/libiconv.so)
+set(ICONV_LIBRARIES ${THIRD}/lib/libcharset.a ${THIRD}/lib/libiconv.so)
 
 ExternalProject_Add(SQLite3
     PREFIX ${THIRD}
@@ -29,7 +29,7 @@ ExternalProject_Add(SQLite3
     URL_HASH SHA256=87775784f8b22d0d0f1d7811870d39feaa7896319c7c20b849a4181c5a50609b
     CONFIGURE_COMMAND ""
     BUILD_COMMAND ""
-    INSTALL_COMMAND cp ${THIRD}/src/SQLite3/sqlite3.h ${CMAKE_BINARY_DIR}/include
+    INSTALL_COMMAND cp ${THIRD}/src/SQLite3/sqlite3.h ${THIRD}/include
     )
 
 set(SQLITE3_SRCS ${THIRD}/src/SQLite3/sqlite3.c)
@@ -38,7 +38,7 @@ add_library(sqlite ${SQLITE3_SRCS})
 add_dependencies(sqlite SQLite3)
 
 include_directories(
-    ${CMAKE_BINARY_DIR}/include
+    ${THIRD}/include
     ./include
     )
 
