@@ -6,30 +6,21 @@
 ## 用途
 将英文年、月、日、时进行八字排盘。例入：输入1990-10-10 7时（程序默认参数）将输出：“庚午 丙戌 戊申 丙辰”
 
-## 编译
+## 编译及环境需求
 
 ### 库需求
 
-#### cxxopts
+* cxxopts - 解析命令行参数使用
+* libiconv - 字符集转换使用
+* sqlite3 - 从sqlite3数据库中查询农历日期
 
-解析命令行参数使用
+### 编译步骤
 
-#### libiconv
+*使用CMake在Linux下或类Unix的环境下进行编译，因为编译过程中需要使用到autotools。在Windows下请使用WSL1/2*
 
-字符集转换使用
+依赖的三个包将由编译脚本自行从网上下载到本地并编译集成到项目中，你所需要做的只是在工程根目录下创建`build`目录，然后在该目录中使用编译指令`cmake .. && cmake --build .`即可。
 
-#### sqlite3
-
-从sqlite3数据库中查询农历日期
-
-### 编译指令
-
-默认使用[Conan](https://conan.io)包管理器来管理包，请参考[Conan](https://conan.io)官方网站安装Conan后，使用以下命令来获取平台包然后执行`cmake ..`进行配置和编译。
-
-`mkdir build && cd build && conan install .. && cmake .. && make`
-
-注：若不使用Conan，请不要执行`conan install ..`，然后使用`cmake .. -DUSE_CONAN=OFF`来配置。
-注：若要编译非优化带调试信息的版本，请使用`cmake .. -DCMAKE_BUILD_TYPE=Debug`来配置。
+注：若要编译非优化且带调试信息的版本，请使用`cmake .. -DCMAKE_BUILD_TYPE=Debug`来进行配置。
 
 ## 使用说明
 编译出来的工具为命令行工具，使用-h或--help将显示以下命令行信息
