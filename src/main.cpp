@@ -10,12 +10,12 @@ public:
     Arguments(int argc, const char* argv[]) {
         cxxopts::Options opts("Eight-words", "八字排盘");
         opts.add_options()                                                 // All options
-                ("help,h", "Show help")                                    // --help
-                ("year,y", "Year", cxxopts::value<int>())                  // --year
-                ("month,m", "Month", cxxopts::value<int>())                // --month
-                ("day,d", "Day", cxxopts::value<int>())                    // --day
-                ("hour,H", "Hour", cxxopts::value<int>())                  // --hour
-                ("database,f", "Database", cxxopts::value<std::string>())  // --database
+                ("h,help", "Show help")                                    // --help
+                ("y,year", "Year", cxxopts::value<int>())                  // --year
+                ("m,month", "Month", cxxopts::value<int>())                // --month
+                ("d,day", "Day", cxxopts::value<int>())                    // --day
+                ("H,hour", "Hour", cxxopts::value<int>())                  // --hour
+                ("f,database", "Database", cxxopts::value<std::string>())  // --database
                 ;
 
         cxxopts::ParseResult res = opts.parse(argc, argv);
