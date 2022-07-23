@@ -1,5 +1,7 @@
 # 八字排盘源代码
 
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/mattxlee/eightwords.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/mattxlee/eightwords/alerts/)
+
 ## 用途
 将英文年、月、日、时进行八字排盘。例入：输入1990-10-10 7时（程序默认参数）将输出：“庚午 丙戌 戊申 丙辰”
 
