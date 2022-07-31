@@ -12,7 +12,7 @@ public:
     explicit Calendar(const std::string& dbFile);
     ~Calendar();
 
-    CalendarDay queryChinaDay(int year, int month, int day);
+    CalendarDay queryChineseDay(int year, int month, int day);
 
 private:
     void CC(int ret);

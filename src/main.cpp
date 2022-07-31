@@ -72,7 +72,7 @@ int main(int argc, const char* argv[]) {
 
         // 转换中文日期
         Calendar calendar(args.sqlite3File);
-        CalendarDay chinaDay = calendar.queryChinaDay(args.year, args.month, args.day);
+        CalendarDay chinaDay = calendar.queryChineseDay(args.year, args.month, args.day);
 
         // 查询时辰
         Table8x2 table;

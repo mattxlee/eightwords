@@ -6,7 +6,7 @@ Calendar::Calendar(const std::string& dbFile) { CC(sqlite3_open(dbFile.c_str(), 
 
 Calendar::~Calendar() { CC(sqlite3_close(m_sqlite3)); }
 
-CalendarDay Calendar::queryChinaDay(int year, int month, int day) {
+CalendarDay Calendar::queryChineseDay(int year, int month, int day) {
     sqlite3_stmt* stmt;
     CC(sqlite3_prepare(
             m_sqlite3, "select cn_year, cn_month, cn_day from calendar where `year` = ? and `month` = ? and `day` = ?",
