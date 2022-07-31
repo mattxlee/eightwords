@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.2)
 
 project(eightwords)
 
+option(BUILD_TEST "Build test program" OFF)
+
 include(FetchContent)
 FetchContent_Declare(cxxopts
     GIT_REPOSITORY https://github.com/jarro2783/cxxopts
@@ -45,7 +47,7 @@ include_directories(
 
 set(LIB_SRCS
     ./src/calendar.cpp
-    ./src/calender_calc.cpp
+    ./src/calendar_calc.cpp
     ./src/eightwords.cpp
     ./src/face_converter.cpp
     )
@@ -70,3 +72,24 @@ set_target_properties(eightwords_cli PROPERTIES CXX_STANDARD 11)
 target_link_libraries(eightwords_cli
     eightwords cxxopts::cxxopts ${ICONV_LIBRARIES} sqlite Threads::Threads dl
     )
+
+if (BUILD_TEST)
+    FetchContent_Declare(gtest
+        GIT_REPOSITORY https://github.com/google/googletest
+        GIT_TAG release-1.12.1
+    )
+    FetchContent_MakeAvailable(gtest)
+    enable_testing()
+    set(TEST_SRCS
+        ./src/test.cpp
+        ${gtest_SOURCE_DIR}/googletest/src/gtest-all.cc
+        ${gtest_SOURCE_DIR}/googletest/src/gtest_main.cc
+        )
+    add_executable(eightwords_test ${TEST_SRCS})
+    target_link_libraries(eightwords_test PRIVATE eightwords ${ICONV_LIBRARIES} sqlite Threads::Threads dl)
+    target_include_directories(eightwords_test PRIVATE
+        ${gtest_SOURCE_DIR}/googletest
+        ${gtest_SOURCE_DIR}/googletest/include
+        )
+    add_test(NAME eightwords_test COMMAND eightwords_test)
+endif()

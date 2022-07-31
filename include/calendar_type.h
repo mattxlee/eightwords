@@ -31,9 +31,15 @@ struct CalendarDay {
     std::string chinaYear;   // 中文年
     std::string chinaMonth;  // 中文月
     std::string chinaDay;    // 中文日
+
+    std::string toString() const { return chinaYear + " " + chinaMonth + " " + chinaDay; }
 };
 
 // 英中日历对照
 typedef std::map<CalendarKey, CalendarDay> CalendarDayList;
+
+inline bool operator==(const CalendarDay& lhs, const CalendarDay& rhs) {
+    return lhs.chinaYear == rhs.chinaYear && lhs.chinaMonth == rhs.chinaMonth && lhs.chinaDay == rhs.chinaDay;
+}
 
 #endif

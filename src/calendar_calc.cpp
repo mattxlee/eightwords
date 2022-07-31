@@ -1,4 +1,4 @@
-#include "calender_calc.h"
+#include "calendar_calc.h"
 
 #include <cstring>
 #include <chrono>
@@ -49,7 +49,7 @@ static int yearDays(int y) {
     for (i = 0x8000; i > 0x8; i >>= 1) {
         if ((LUNAR_INFO[y - 1900] & i) != 0) sum += 1;
     }
-    return (sum + leapDays(y));
+    return sum + leapDays(y);
 }
 
 // 将日期转成time_t
@@ -62,24 +62,58 @@ time_t to_time_t(int year, int month, int day) {
     return mktime(&t);
 }
 
-// ====== 传入月日的offset传回干支，0=甲子
-static std::string cyclicalm(int num) {
-    std::string GAN[] = {"甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"};
-    std::string ZHI[] = {"子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"};
-    return (GAN[num % 10] + ZHI[num % 12]);
-}
+static std::string GAN[] = {"甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"};
+static std::string ZHI[] = {"子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"};
+
+class ChineseEra {
+public:
+    static std::string calcYear(int cnYearNum) {
+        int num = cnYearNum - 1900 + 36;
+        return GAN[num % 10] + ZHI[num % 12];
+    }
+
+    static std::string calcMonth(int year, int cnMonthNum) {
+        std::string tg, dz;
+        int num = (year - 4) % 5;
+        int gan_index;
+        if (num == 4) {
+            gan_index = (cnMonthNum - 1) % 10;
+        } else {
+            gan_index = (cnMonthNum + (num * 2) + 1) % 10;
+        }
+        int dz_index = (cnMonthNum + 1) % 12;
+        return GAN[gan_index] + ZHI[dz_index];
+    }
+
+    static std::string calcDay(int gzr) {
+        std::string res;
+        if (gzr % 10 == 0) {
+            res = GAN[9] + ZHI[gzr % 12];
+        }
+        if (gzr % 12 == 0) {
+            res = GAN[gzr % 10] + ZHI[11];
+        }
+        if ((gzr != 0 && (gzr % 10) != 0 && (gzr % 12) != 0)) {
+            res = GAN[gzr % 10] + ZHI[gzr % 12];
+        }
+        if (gzr == 0) {
+            res = GAN[gzr % 10] + ZHI[gzr % 12];
+        }
+        return res;
+    }
+};
 
 }  // namespace lunar
 
 CalendarDay CalendarCalc::queryChineseDay(int in_year, int in_month, int in_day) {
-    int year, month, day;
-    int yearCyl, monCyl, dayCyl;
+    int year{0}, month{0}, day{0};
+    int yearCyl{0}, monCyl{0}, dayCyl{0};
     int leapMonth = 0;
 
-    //求出和1900年1月31日相差的天数
+    // 求出和1900年1月31日相差的天数
     time_t d1900_1_31 = lunar::to_time_t(1900, 1, 31);
     time_t in_date = lunar::to_time_t(in_year, in_month, in_day);
-    uint64_t offset = (in_date - d1900_1_31) / (60 * 60 * 24);
+    long offset = (in_date - d1900_1_31) / (60 * 60 * 24);
 
     dayCyl = offset + 40;
     monCyl = 14;
@@ -114,8 +148,9 @@ CalendarDay CalendarCalc::queryChineseDay(int in_year, int in_month, int in_day)
             --iMonth;
             leap = true;
             daysOfMonth = lunar::leapDays(year);
-        } else
+        } else {
             daysOfMonth = lunar::monthDays(year, iMonth);
+        }
 
         offset -= daysOfMonth;
         //解除闰月
@@ -142,9 +177,9 @@ CalendarDay CalendarCalc::queryChineseDay(int in_year, int in_month, int in_day)
     day = offset + 1;
 
     CalendarDay res;
-    res.chinaYear = lunar::cyclicalm(year);
-    res.chinaMonth = lunar::cyclicalm(month);
-    res.chinaDay = lunar::cyclicalm(day);
+    res.chinaYear = lunar::ChineseEra::calcYear(year);
+    res.chinaMonth = lunar::ChineseEra::calcMonth(in_year, month);
+    res.chinaDay = lunar::ChineseEra::calcDay(offset);
 
     return res;
 }
