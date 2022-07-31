@@ -45,6 +45,7 @@ include_directories(
 
 set(LIB_SRCS
     ./src/calendar.cpp
+    ./src/calender_calc.cpp
     ./src/eightwords.cpp
     ./src/face_converter.cpp
     )
