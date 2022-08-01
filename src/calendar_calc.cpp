@@ -133,7 +133,7 @@ CalendarDay CalendarCalc::queryChineseDay(int in_year, int in_month, int in_day)
         iYear--;
         monCyl -= 12;
     }
-    //农历年份
+    // 农历年份
     year = iYear;
 
     yearCyl = iYear - 1864;
@@ -143,7 +143,7 @@ CalendarDay CalendarCalc::queryChineseDay(int in_year, int in_month, int in_day)
     // 用当年的天数offset，逐个减去每月（农历）的天数，求出当天是本月的第几天
     int iMonth, daysOfMonth = 0;
     for (iMonth = 1; iMonth < 13 && offset > 0; iMonth++) {
-        //闰月
+        // 闰月
         if (leapMonth > 0 && iMonth == (leapMonth + 1) && !leap) {
             --iMonth;
             leap = true;
@@ -153,7 +153,7 @@ CalendarDay CalendarCalc::queryChineseDay(int in_year, int in_month, int in_day)
         }
 
         offset -= daysOfMonth;
-        //解除闰月
+        // 解除闰月
         if (leap && iMonth == (leapMonth + 1)) leap = false;
         if (!leap) monCyl++;
     }
