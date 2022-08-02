@@ -27,6 +27,10 @@ inline bool operator==(const CalendarKey& lhs, const CalendarKey& rhs) {
     return lhs.year == rhs.year && lhs.month == rhs.month && lhs.day == rhs.day;
 }
 
+inline bool operator!=(const CalendarKey& lhs, const CalendarKey& rhs) {
+    return !(lhs == rhs);
+}
+
 struct CalendarDay {
     std::string chinaYear;   // 中文年
     std::string chinaMonth;  // 中文月
@@ -39,7 +43,12 @@ struct CalendarDay {
 typedef std::map<CalendarKey, CalendarDay> CalendarDayList;
 
 inline bool operator==(const CalendarDay& lhs, const CalendarDay& rhs) {
-    return lhs.chinaYear == rhs.chinaYear && lhs.chinaMonth == rhs.chinaMonth && lhs.chinaDay == rhs.chinaDay;
+    return lhs.chinaYear == rhs.chinaYear && lhs.chinaDay == rhs.chinaDay;
+    // return lhs.chinaYear == rhs.chinaYear && lhs.chinaMonth == rhs.chinaMonth && lhs.chinaDay == rhs.chinaDay;
+}
+
+inline bool operator!=(const CalendarDay& lhs, const CalendarDay& rhs) {
+    return !(lhs == rhs);
 }
 
 #endif

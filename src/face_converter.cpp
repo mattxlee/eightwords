@@ -27,8 +27,6 @@ Convertor::~Convertor() {
 }
 
 std::string Convertor::convert(const std::string& src) {
-    // int arg = 1;
-    // iconvctl(_iconv, ICONV_SET_DISCARD_ILSEQ, &arg);
     const char* sz_src = src.c_str();
     size_t len_src = src.size() + 1;
     if (src.empty()) {

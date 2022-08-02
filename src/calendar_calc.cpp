@@ -62,8 +62,38 @@ time_t to_time_t(int year, int month, int day) {
     return mktime(&t);
 }
 
-static std::string GAN[] = {"甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"};
-static std::string ZHI[] = {"子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"};
+int diff_days(time_t lhs, time_t rhs) {
+    long secs = std::abs(rhs - lhs);
+    return secs / (60 * 60 * 24);
+}
+
+static std::array<std::string, 10> GAN = {"甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"};
+static std::array<std::string, 12> ZHI = {"子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"};
+
+namespace utils {
+
+time_t make_time_t(int year, int month, int day) {
+    tm t;
+    memset(&t, 0, sizeof(t));
+    t.tm_year = year - 1900;
+    t.tm_mon = month - 1;
+    t.tm_mday = day;
+    return mktime(&t);
+}
+
+int seconds_of_a_day() { return 60 * 60 * 24; }
+
+int diff_days(time_t lhs, time_t rhs) {
+    long secs = std::abs(rhs - lhs);
+    return secs / seconds_of_a_day();
+}
+
+std::tuple<int, int, int> make_date(time_t t) {
+    tm* date = gmtime(&t);
+    return std::make_tuple(date->tm_year + 1900, date->tm_mon + 1, date->tm_mday);
+}
+
+}  // namespace utils
 
 class ChineseEra {
 public:
@@ -85,21 +115,37 @@ public:
         return GAN[gan_index] + ZHI[dz_index];
     }
 
-    static std::string calcDay(int gzr) {
-        std::string res;
-        if (gzr % 10 == 0) {
-            res = GAN[9] + ZHI[gzr % 12];
+    static std::string calcDay(int year, int month, int day) {
+        int base;
+        if (year <= 1999) {
+            base = ((year % 100) + 3) * 5 + 55 + ((year % 100) - 1) / 4;
+        } else {
+            base = ((year % 100) + 7) * 5 + 15 + ((year % 100) + 19) / 4;
         }
-        if (gzr % 12 == 0) {
-            res = GAN[gzr % 10] + ZHI[11];
-        }
-        if ((gzr != 0 && (gzr % 10) != 0 && (gzr % 12) != 0)) {
-            res = GAN[gzr % 10] + ZHI[gzr % 12];
-        }
-        if (gzr == 0) {
-            res = GAN[gzr % 10] + ZHI[gzr % 12];
-        }
-        return res;
+        base %= 60;
+        int days = utils::diff_days(utils::make_time_t(year, 1, 1), utils::make_time_t(year, month, day));
+        base = (days + base) % 60;
+        int tian_gan_index = base % GAN.size();
+        int di_zhi_index = base % ZHI.size();
+        return GAN[tian_gan_index] + ZHI[di_zhi_index];
+        // static time_t base_date = lunar::to_time_t(1899, 12, 20);
+        // time_t the_date = lunar::to_time_t(year, month, day);
+        // int days = lunar::diff_days(the_date, base_date);
+        // int gzr = (days - 1) % 60;
+        // std::string res;
+        // if (gzr % 10 == 0) {
+        //     res = GAN[9] + ZHI[gzr % 12];
+        // }
+        // if (gzr % 12 == 0) {
+        //     res = GAN[gzr % 10] + ZHI[11];
+        // }
+        // if ((gzr != 0 && (gzr % 10) != 0 && (gzr % 12) != 0)) {
+        //     res = GAN[gzr % 10] + ZHI[gzr % 12];
+        // }
+        // if (gzr == 0) {
+        //     res = GAN[gzr % 10] + ZHI[gzr % 12];
+        // }
+        // return res;
     }
 };
 
@@ -113,7 +159,7 @@ CalendarDay CalendarCalc::queryChineseDay(int in_year, int in_month, int in_day)
     // 求出和1900年1月31日相差的天数
     time_t d1900_1_31 = lunar::to_time_t(1900, 1, 31);
     time_t in_date = lunar::to_time_t(in_year, in_month, in_day);
-    long offset = (in_date - d1900_1_31) / (60 * 60 * 24);
+    long offset = lunar::diff_days(in_date, d1900_1_31);
 
     dayCyl = offset + 40;
     monCyl = 14;
@@ -179,7 +225,7 @@ CalendarDay CalendarCalc::queryChineseDay(int in_year, int in_month, int in_day)
     CalendarDay res;
     res.chinaYear = lunar::ChineseEra::calcYear(year);
     res.chinaMonth = lunar::ChineseEra::calcMonth(in_year, month);
-    res.chinaDay = lunar::ChineseEra::calcDay(offset);
+    res.chinaDay = lunar::ChineseEra::calcDay(in_year, in_month, in_day);
 
     return res;
 }

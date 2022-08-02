@@ -1,9 +1,9 @@
-#ifndef __L4W_CALENDAR_CALC_DATA__
-#define __L4W_CALENDAR_CALC_DATA__
+#ifndef CALENDAR_CAL2_H
+#define CALENDAR_CAL2_H
 
 #include "calendar_type.h"
 
-class CalendarCalc {
+class CalendarCal2 {
 public:
     CalendarDay queryChineseDay(int year, int month, int day);
 };
