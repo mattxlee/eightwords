@@ -23,7 +23,7 @@ TEST(EightWords, ChineseCalendarCalc) {
 
 // TEST(EightWords, ChineseCalendarCalcAll) {
 //     Calendar calendar("../data/calendar.db");
-//     CalendarCalc calendar_calc;
+//     CalendarCal2 calendar_calc;
 
 //     time_t the_day = utils::make_time_t(1980, 1, 1);
 //     time_t end_of_the_day = utils::make_time_t(2099, 12, 31);
