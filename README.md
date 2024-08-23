@@ -1,4 +1,4 @@
-# 八字排盘源代码
+# 八字排盘
 
 ## 用途
 
@@ -18,7 +18,7 @@
 
 ### 编译步骤
 
-因为已经添加了 vcpkg 作为项目的子模块作为包管理器，并且在项目的根目录下的 vcpkg.json 文件中已经说明了依赖库，所以最简单的办法就是直接添加 CMAKE_TOOLCHAIN_FILE 指向子模块中的 vcpkg.cmake 来下载、安装和编译。
+因为已经添加了 vcpkg 作为项目的子模块作为包管理器，并且在项目的根目录下的 [vcpkg.json](vcpkg.json) 文件中已经说明了依赖库，所以最简单的办法就是直接添加 CMAKE_TOOLCHAIN_FILE 指向子模块中的 vcpkg.cmake 来下载、安装和编译。
 
 1. 先将项目克隆到本地，同时也初始化子模块
 
@@ -33,10 +33,10 @@ git clone https://github.com/mattxlee/eightwords && cd eightwords && git submodu
   * 若不想编译测试目标，可以把 `-DBUILD_TEST=1` 删除
 
 ```bash
-cmake . -B build -DCMAKE_TOOLCHAIN_FILE=`pwd/vcpkg/scripts/buildsystems/vcpkg.cmake -DBUILD_TEST=1
+cmake . -B build -DCMAKE_TOOLCHAIN_FILE=`pwd`/vcpkg/scripts/buildsystems/vcpkg.cmake -DBUILD_TEST=1
 ```
 
-3. 执行下方的命令开始编译，注意调整 `-j7` 防止 CPU 过热 🙈
+3. 执行下方的命令开始编译，注意调整 `-j7` 防止 CPU 过热🙈
 
 ```bash
 cmake --build build -j7
@@ -56,6 +56,6 @@ cmake --build build -j7
 
 ## 注
 
-注：这个排盘的算法是曾经的我的一个朋友教的，但是现在的我已经完全忘记了🫠。不过我想在代码输出正确的情况下你们应该不会介意这件事情🙂，毕竟这个世界不存在过不去的坎，也不存在忘不掉的事。现在的我，也就只能对代码做一些修补和优化，稍微的保证一下它的合理性和鲁棒性吧，完结撒花👏🎉🎉。
+注：这个排盘的算法是曾经的我的一个朋友教的，但是现在的我已经完全忘记了🫠。不过我想在代码输出正确的情况下你们应该不会介意这件事情🙂，毕竟这个世界不存在过不去的坎，也不存在忘不掉的事。现在的我，也就只能对代码做一些修补和优化，稍微的保证一下它的合理性和鲁棒性，完结撒花👏🎉🎉。
 
 再注：其实本来想把中文日历转换加上的，但是后来想想这个功能和八字排盘其实没太大关系，所以删除掉了，但是留了一个古老的数据库来作为排盘程序的结果验证👏。
