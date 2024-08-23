@@ -1,5 +1,7 @@
 .DS_Store
 *.pyc
 *.swp
+vcpkg-manifest-install.log
+.vscode/
 build/
-.vscode
+vcpkg_installed/

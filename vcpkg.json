@@ -1,0 +1,7 @@
+{
+    "dependencies": [
+        "libiconv",
+        "sqlite3",
+        "gtest"
+    ]
+}
