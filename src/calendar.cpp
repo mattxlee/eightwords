@@ -2,6 +2,8 @@
 
 #include "calendar.h"
 
+namespace l4w {
+
 Calendar::Calendar(std::string const& dbFile) {
   CC(sqlite3_open(dbFile.c_str(), &m_sqlite3));
 }
@@ -49,3 +51,5 @@ void Calendar::CC(int ret) {
   ssErr << "sqlite error: " << sqlite3_errmsg(m_sqlite3);
   throw std::runtime_error(ssErr.str());
 }
+
+} // namespace l4w

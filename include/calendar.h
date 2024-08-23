@@ -7,6 +7,8 @@
 
 #include "calendar_type.h"
 
+namespace l4w {
+
 class Calendar {
 public:
   explicit Calendar(std::string const& dbFile);
@@ -20,5 +22,7 @@ private:
 private:
   sqlite3* m_sqlite3 = nullptr;
 };
+
+} // namespace l4w
 
 #endif

@@ -3,6 +3,8 @@
 
 #include <algorithm>
 
+namespace l4w {
+
 CNString splitChineseString(std::string const& src) {
   CNString result;
   Convertor conv(face_utf8, face_gb2312);
@@ -103,3 +105,5 @@ CNStringList Table8x2::analyze(std::string const& cn_year,
   // 返回
   return _8x2;
 }
+
+} // namespace l4w

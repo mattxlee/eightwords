@@ -4,6 +4,8 @@
 #include <map>
 #include <string>
 
+namespace l4w {
+
 struct CalendarKey {
   int year; // 英文年
   int month; // 英文月
@@ -58,5 +60,7 @@ inline bool operator==(CalendarDay const& lhs, CalendarDay const& rhs) {
 inline bool operator!=(CalendarDay const& lhs, CalendarDay const& rhs) {
   return !(lhs == rhs);
 }
+
+} // namespace l4w
 
 #endif

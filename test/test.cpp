@@ -9,7 +9,7 @@ static int TEST_YEAR = 1989;
 static int TEST_MONTH = 2;
 static int TEST_DAY = 8;
 
-std::string CNStringToString(CNString const& cn_str) {
+std::string CNStringToString(l4w::CNString const& cn_str) {
   std::stringstream ss;
   for (auto const& cn_char : cn_str) {
     ss << cn_char;
@@ -18,10 +18,10 @@ std::string CNStringToString(CNString const& cn_str) {
 }
 
 TEST(EightWords, Calculation) {
-  Calendar calendar("data/calendar.db");
+  l4w::Calendar calendar("data/calendar.db");
   auto calendar_day = calendar.queryChineseDay(1980, 2, 10);
 
-  Table8x2 table;
+  l4w::Table8x2 table;
   auto cn_list = table.analyze(calendar_day.chinaYear, calendar_day.chinaMonth,
       calendar_day.chinaDay, 3);
 

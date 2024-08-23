@@ -5,6 +5,8 @@
 
 #include "eightwords_type.h"
 
+namespace l4w {
+
 // 八字排盘
 class Table8x2 {
 public:
@@ -17,5 +19,7 @@ private:
   HourToCNHour _hourToCnHour;
   CNStringList _8x2;
 };
+
+} // namespace l4w
 
 #endif

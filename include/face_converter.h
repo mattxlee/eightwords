@@ -5,6 +5,8 @@
 
 #include <string>
 
+namespace l4w {
+
 enum face { face_utf8 = 0, face_gb2312, face_big5, face_gbk };
 
 class Convertor {
@@ -18,5 +20,7 @@ public:
 private:
   iconv_t _iconv = nullptr;
 };
+
+} // namespace l4w
 
 #endif

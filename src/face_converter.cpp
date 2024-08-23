@@ -3,6 +3,8 @@
 #include <cstring>
 #include <stdexcept>
 
+namespace l4w {
+
 std::string Convertor::face_to_string(face f) {
   switch (f) {
   case face_utf8:
@@ -47,3 +49,5 @@ std::string Convertor::convert(std::string const& src) {
   delete[] sz_dst2;
   return dst;
 }
+
+} // namespace l4w

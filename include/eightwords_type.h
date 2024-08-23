@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 
+namespace l4w {
+
 /*
  年上起月表.
 
@@ -62,5 +64,7 @@ struct CNDayToHour {
 
 // 对照表
 typedef std::map<CNChar, std::vector<CNDayToHour>> CNTimeDayTable;
+
+} // namespace l4w
 
 #endif
