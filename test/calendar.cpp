@@ -9,7 +9,22 @@ Calendar::Calendar(std::string const& dbFile) {
 }
 
 Calendar::~Calendar() {
-  CC(sqlite3_close(m_sqlite3));
+  try {
+    CC(sqlite3_close(m_sqlite3));
+  } catch (...) { }
+}
+
+Calendar::Calendar(Calendar&& rhs) noexcept
+    : m_sqlite3(rhs.m_sqlite3) {
+  rhs.m_sqlite3 = nullptr;
+}
+
+Calendar& Calendar::operator=(Calendar&& rhs) noexcept {
+  if (&rhs != this) {
+    m_sqlite3 = rhs.m_sqlite3;
+    rhs.m_sqlite3 = nullptr;
+  }
+  return *this;
 }
 
 CalendarDay Calendar::queryChineseDay(int year, int month, int day) {

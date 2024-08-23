@@ -14,6 +14,12 @@ public:
   explicit Calendar(std::string const& dbFile);
   ~Calendar();
 
+  Calendar(Calendar const&) = delete;
+  Calendar& operator=(Calendar const&) = delete;
+
+  Calendar(Calendar&& rhs) noexcept;
+  Calendar& operator=(Calendar&& rhs) noexcept;
+
   CalendarDay queryChineseDay(int year, int month, int day);
 
 private:
