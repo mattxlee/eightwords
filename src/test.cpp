@@ -8,17 +8,19 @@ static int TEST_MONTH = 2;
 static int TEST_DAY = 8;
 
 TEST(EightWords, ChineseCalendarCalc) {
-    Calendar calendar("../data/calendar.db");
-    CalendarCal2 calendar_calc;
+  Calendar calendar("../data/calendar.db");
+  CalendarCal2 calendar_calc;
 
-    CalendarDay d1 = calendar.queryChineseDay(TEST_YEAR, TEST_MONTH, TEST_DAY);
-    CalendarDay d2 = calendar_calc.queryChineseDay(TEST_YEAR, TEST_MONTH, TEST_DAY);
+  CalendarDay d1 = calendar.queryChineseDay(TEST_YEAR, TEST_MONTH, TEST_DAY);
+  CalendarDay d2
+      = calendar_calc.queryChineseDay(TEST_YEAR, TEST_MONTH, TEST_DAY);
 
-    std::cout << "date: " << TEST_YEAR << "-" << TEST_MONTH << "-" << TEST_DAY << std::endl;
-    std::cout << "  db: " << d1.toString() << std::endl;
-    std::cout << "calc: " << d2.toString() << std::endl;
+  std::cout << "date: " << TEST_YEAR << "-" << TEST_MONTH << "-" << TEST_DAY
+            << std::endl;
+  std::cout << "  db: " << d1.toString() << std::endl;
+  std::cout << "calc: " << d2.toString() << std::endl;
 
-    EXPECT_EQ(d1, d2);
+  EXPECT_EQ(d1, d2);
 }
 
 // TEST(EightWords, ChineseCalendarCalcAll) {
@@ -35,7 +37,8 @@ TEST(EightWords, ChineseCalendarCalc) {
 //             CalendarDay d2 = calendar_calc.queryChineseDay(year, month, day);
 //             EXPECT_EQ(d1, d2);
 //             if (d1 != d2) {
-//                 std::cerr << " (" << year << "-" << month << "-" << day << ")" << d1.toString()
+//                 std::cerr << " (" << year << "-" << month << "-" << day <<
+//                 ")" << d1.toString()
 //                           << " != " << d2.toString() << std::endl;
 //                 break;
 //             }

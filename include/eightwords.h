@@ -8,13 +8,14 @@
 // 八字排盘
 class Table8x2 {
 public:
-    Table8x2();
-    CNStringList analyze(const std::string& cn_year, const std::string& cn_month, const std::string& cn_day, int hour);
+  Table8x2();
+  CNStringList analyze(std::string const& cn_year, std::string const& cn_month,
+      std::string const& cn_day, int hour);
 
 private:
-    CNTimeDayTable _dayTable;
-    HourToCNHour _hourToCnHour;
-    CNStringList _8x2;
+  CNTimeDayTable _dayTable;
+  HourToCNHour _hourToCnHour;
+  CNStringList _8x2;
 };
 
 #endif

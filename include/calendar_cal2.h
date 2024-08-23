@@ -5,7 +5,7 @@
 
 class CalendarCal2 {
 public:
-    CalendarDay queryChineseDay(int year, int month, int day);
+  CalendarDay queryChineseDay(int year, int month, int day);
 };
 
 namespace utils {

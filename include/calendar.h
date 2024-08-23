@@ -9,16 +9,16 @@
 
 class Calendar {
 public:
-    explicit Calendar(const std::string& dbFile);
-    ~Calendar();
+  explicit Calendar(std::string const& dbFile);
+  ~Calendar();
 
-    CalendarDay queryChineseDay(int year, int month, int day);
-
-private:
-    void CC(int ret);
+  CalendarDay queryChineseDay(int year, int month, int day);
 
 private:
-    sqlite3* m_sqlite3 = nullptr;
+  void CC(int ret);
+
+private:
+  sqlite3* m_sqlite3 = nullptr;
 };
 
 #endif

@@ -1,0 +1,14 @@
+---
+Language:                         Cpp
+BasedOnStyle:                     WebKit
+AccessModifierOffset:             -2
+BreakBeforeBraces:                Attach
+ColumnLimit:                      80
+IndentWidth:                      2
+ContinuationIndentWidth:          4
+DerivePointerAlignment:           false
+PointerAlignment:                 Left
+QualifierAlignment:               Right
+NamespaceIndentation:             None
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortLambdasOnASingleLine:   Empty
