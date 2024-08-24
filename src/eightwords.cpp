@@ -2,6 +2,7 @@
 #include "face_converter.h"
 
 #include <algorithm>
+#include <stdexcept>
 
 namespace l4w {
 
