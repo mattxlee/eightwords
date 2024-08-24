@@ -5,11 +5,13 @@ project(eightwords)
 option(BUILD_TEST "Build test program" OFF)
 
 find_package(Threads REQUIRED)
+find_package(Iconv REQUIRED)
 
 file(GLOB LIB_SRCS ./src/*.cpp)
 add_library(eightwords STATIC ${LIB_SRCS})
 target_compile_features(eightwords PUBLIC cxx_std_11)
 target_include_directories(eightwords PUBLIC ./include)
+target_link_libraries(eightwords PUBLIC Iconv::Iconv)
 
 if(BUILD_TEST)
   find_package(unofficial-sqlite3 CONFIG REQUIRED)
@@ -18,8 +20,7 @@ if(BUILD_TEST)
   file(GLOB TEST_SRCS ./test/*.cpp)
   add_executable(eightwords_test ${TEST_SRCS})
   target_link_libraries(
-    eightwords_test
-    PRIVATE eightwords Threads::Threads unofficial::sqlite3::sqlite3 iconv
-            GTest::gtest_main)
+    eightwords_test PRIVATE eightwords Threads::Threads
+                            unofficial::sqlite3::sqlite3 GTest::gtest_main)
   add_test(NAME eightwords_test COMMAND eightwords_test)
 endif()
