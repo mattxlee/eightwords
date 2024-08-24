@@ -18,7 +18,7 @@ std::string CNStringToString(l4w::CNString const& cn_str) {
 }
 
 TEST(EightWords, Calculation) {
-  l4w::Calendar calendar("data/calendar.db");
+  l4w::Calendar calendar("../data/calendar.db");
   auto calendar_day = calendar.queryChineseDay(1980, 2, 10);
 
   l4w::Table8x2 table;
